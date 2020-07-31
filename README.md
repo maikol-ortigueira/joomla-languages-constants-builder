@@ -1,0 +1,1 @@
+# Joomla! language constants builder system
