@@ -1,12 +1,12 @@
 {
-  "name": "practica-1",
+  "name": "joomla-language-constants-builder",
   "version": "1.0.0",
-  "description": "",
+  "description": "A system to append easily languages constants to joomla language files",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src"
   },
-  "author": "",
+  "author": "Maikol Fustes",
   "license": "ISC",
   "dependencies": {
     "clear": "^0.1.0",

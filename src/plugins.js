@@ -24,7 +24,7 @@ async function main() {
     // Get the extension name
     const ext = await getExtension(extType);
     // Get the text to be translated
-    const text = await getText(textToTranslate, 'Hola Mundo');
+    const text = await getText(textToTranslate);
 
     // Get the extension language path
     const langPath = `${extPath}/${ext['type']}/${ext['group']}/${ext['extension']}/language`;
