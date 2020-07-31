@@ -2,16 +2,25 @@
 
 ## What is this?
 With this code I intend to help the joomla community in the development of extensions.
+
 Joomla! has a powerful string translation system. The texts are stored in separate files depending on the language.
+
 At the same time these files are grouped according to the client (front-end, back-end). For example, for a Joomla component that is intended to be displayed in two languages (English and Spanish), 6 files must be created with the translation strings, three for one language and another 3 for the other. Of these three, two correspond to the back-end and one to the front-end.
+
 The translation strings are composed of a constant and its value.
 The prefix of the constant varies depending on the type of extension (com for components, plg for plugins, etc...).
-From the prefix, the name of the extension is added.... [see Joomla docs for more information](https://docs.joomla.org/Making_templates_translatable)
+From the prefix, the name of the extension is added.... [see Joomla docs for more information](https://docs.joomla.org/Making_templates_translatable).
+
 An example of a translation string would be:
-COM_CONTENT_ADMIN_FIELD_USER_NAME_LBL="User name", where "COM_CONTENT_ADMIN_FIELD_USER_NAME_LBL" would be the constant and "User name" would be its value, in this case for english language
+
+`COM_CONTENT_ADMIN_FIELD_USER_NAME_LBL="User name"`, where "**`COM_CONTENT_ADMIN_FIELD_USER_NAME_LBL`**" would be **the constant** and "**User name**" would be its **value**, in this case for english language.
+
 In short, if the strings are well organized the system works perfectly throughout the site.
+
 This all sounds very good, but when it comes to generating the code it is a bit tedious to have to update all the language files as the constants are inserted in the code.
+
 The usual thing is to program in one language (English) and update only one file, and once the development is finished create a new file for each of the languages you want to include in the project. This also has its disadvantages, since it often happens that some paragraphs of the project vary in meaning depending on the context.
+
 For this reason I have created this code, and I hope you find it useful.
 
 ## How it works
@@ -53,10 +62,10 @@ Once there you must indicate in the file the extensions that make up your projec
     "packages": ["foo"]
 }
 ```
-If your project is composed of only one extension you can either remove the rest of the extensions or leave the an empty array (ex.: "packages": []), it's up to you.
+If your project is composed of only one extension you can either remove the rest of the extensions or leave an empty array (ex.: `"packages": []`), it's up to you.
 
 ## All installed and configured!, lets translate
-If everything went well, all you have to do from now on is run 'npm start' every time you want to translate a text in your project.
+If everything went well, all you have to do from now on is run **`npm start`** every time you want to translate a text in your project.
 
 You will get asked about your extension type (if more than one extension type), the extension name (if more than one extension per type), the text to be translated, then it will show you each translated string to confirm o replace it. The last question is about the constant composition.
 
