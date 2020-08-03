@@ -3,5 +3,5 @@
     "extConfFilepath": "the_extension_path",
     "extConfFile": "extensions-config.json",
     "langs": ["en-GB", "es-ES"],
-    "motherLanguage": "es-ES"
+    "motherLanguage": "en-GB"
 }

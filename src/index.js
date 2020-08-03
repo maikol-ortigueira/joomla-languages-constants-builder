@@ -1,5 +1,5 @@
 const {
-    getExtensionType
+    getExtensionType, getExtensions
 } = require('./utils');
 const clear = require('clear');
 

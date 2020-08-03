@@ -11,16 +11,20 @@ var {
     motherLanguage
 } = require('../config.json');
 const extensions = require(`${extensionsPath}/${extConfFilepath}/${extConfFile}`);
-const extPath = extensionsPath;
+const extPath = (extensions.hasOwnProperty('package') && extensions.package !== '') ? `${extensionsPath}/packages/${extensions.package}` : extensionsPath;
+console.log(extPath)
 motherLanguage =  (motherLanguage && motherLanguage) != '' ? motherLanguage : 'es-ES';
 const motherIso = motherLanguage.split('-')[0];
 const groupsExtensions = ['plugins', 'modules'];
-const ext = ['components', 'plugins', 'modules', 'packages'];
+const ext = ['components', 'plugins', 'modules', 'package'];
 
 if (!langs || langs.length === 0){
     langs = ['en-GB'];
 }
 
+/**
+ * @returns {Array} The config file languages
+ */
 const targetLangs = () => {
     results = [];
     langs.forEach(lang => {
@@ -39,8 +43,14 @@ const targetLangs = () => {
  */
 const hasExtensions = (extensionName) => {
     if (extensions.hasOwnProperty(extensionName)) {
-        if (extensionName === 'components' || extensionName === 'packages') {
+        if (extensionName === 'components') {
             if (extensions[extensionName].length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (extensionName === 'package') {
+            if (extensions[extensionName] !== '') {
                 return true;
             } else {
                 return false;
@@ -157,10 +167,12 @@ const getExtension = async (extensionType) => {
     const extensions = getExtensions(extensionType, group);
     const selExt = await trans('Select the extension', motherIso, 'en');
 
-    if (extensions.length === 1){
+    if ((Array.isArray(extensions) && extensions.length === 1)) {
         var extension = extensions[0];
-    } else {
+    } else if (Array.isArray(extensions)){
         extension = await input.select(selExt, extensions);
+    } else if (typeof(extensions) === 'string' && extensions !== '') {
+        extension = extensions;
     }
 
     result['extension'] = extension;
@@ -202,7 +214,7 @@ const asyncForEach = async (array, callback) => {
  */
 const getConstanteSufix = async () => {
     const constType = await trans("The constant's type", motherIso, 'en');
-    return await input.select(constType, ['Label', 'Description', 'Message', 'Placeholder', 'Otro'])
+    return await input.select(constType, ['Label', 'Description', 'Message', 'Placeholder', 'Other'])
 }
 
 /**

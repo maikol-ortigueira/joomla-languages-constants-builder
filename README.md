@@ -67,6 +67,8 @@ If your project is composed of only one extension you can either remove the rest
 ## All installed and configured!, lets translate
 If everything went well, all you have to do from now on is run **`npm start`** every time you want to translate a text in your project.
 
+![mi gif](vendor/joom-lang-const.gif)
+
 You will get asked about your extension type (if more than one extension type), the extension name (if more than one extension per type), the text to be translated, then it will show you each translated string to confirm o replace it. The last question is about the constant composition.
 
 Once all these questions have been answered, the text strings will be automatically stored in their corresponding files and the value of the constant will be copied to the clipboard. You can now just paste it into the code (ctrl+v or shift+ctrl+v).

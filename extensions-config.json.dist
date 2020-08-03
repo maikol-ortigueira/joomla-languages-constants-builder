@@ -2,11 +2,12 @@
     "components": ["content"],
     "plugins": {
         "content": ["foo"],
-        "system": ["bar"]
+        "system": ["bar"],
+        "foo": ["bar]
     },
     "modules": {
         "site": ["foo", "bar"],
         "admin": ["foo"]
     },
-    "packages": ["foo"]
+    "package": "foo"
 }

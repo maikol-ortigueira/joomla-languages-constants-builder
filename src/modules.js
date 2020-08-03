@@ -4,7 +4,6 @@ const {
 
 const { extPath, getText, trans } = require("./utils");
 const copy = require('clipboardy').writeSync;
-const fs = require('fs');
 const isoCountriesLanguages = require('iso-countries-languages');
 // The config languages
 const langs = targetLangs();
@@ -12,17 +11,17 @@ const langs = targetLangs();
 // The user language
 const motherIso = motherLanguage.split('-')[0];
 // This filename
-const extType = __filename.split('/').pop().split('.')[0];
+const extType = 'modules';
 
 // The main function
 async function main() {
     // The translated input label strings
-    const textToTranslate = await trans('The text to be translated', motherIso, 'en');
+    const textToTranslate = await trans('The String Value', motherIso, 'en');
     const inputConst = await trans("The constant's value", motherIso, 'en');
     
     // Get the extension name
     const ext = await getExtension(extType);
-    // Get the text to be translated
+    // Get The String Value
     const text = await getText(textToTranslate);
 
     // Get the extension language path
@@ -34,21 +33,24 @@ async function main() {
     
     // Start the translations
     const start = async () => {
-        await asyncForEach(langs, async (lang) => {
-            // The iso target language
-            const target = lang.target;
-            const isoLang = isoCountriesLanguages.getLanguage('en', target);
-            const selLangV = await trans(`${isoLang} version`, motherIso, 'en');
-
-            // The extension language file
-            const file = `${langPath}/${lang.language}/${lang.language}.mod_${ext['extension']}.ini`;
-            // Translate the string
-            const translated = await trans(text, target);
-            const text2 = await getText(selLangV, translated);
-            
-            // Push the language data
-            data.push({language: lang.language, text: translated, file: file});
-        });
+        // Only if you need more than one language
+        if (langs.length > 0) {
+            await asyncForEach(langs, async (lang) => {
+                // The iso target language
+                const target = lang.target;
+                const isoLang = isoCountriesLanguages.getLanguage('en', target);
+                const selLangV = await trans(`${isoLang} version`, motherIso, 'en');
+                
+                // The extension language file
+                const file = `${langPath}/${lang.language}/${lang.language}.mod_${ext['extension']}.ini`;
+                // Translate the string
+                const translated = await trans(text, target);
+                const text2 = await getText(selLangV, translated);
+                
+                // Push the language data
+                data.push({language: lang.language, text: translated, file: file});
+            });
+        }
 
         // Get the constant value from user
         const langString = await getText(inputConst).then(
@@ -76,6 +78,7 @@ async function main() {
             // Append the data to language file
             appendToFile(lang)
         })
+        console.log('\n\nConstant Value: \x1b[1m\x1b[33m%s\x1b[0m', data[0].constant, '\n\n');
     });
 }
 
