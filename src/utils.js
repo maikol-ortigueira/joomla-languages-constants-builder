@@ -4,19 +4,21 @@ const fs = require('fs');
 
 // Get extensions from config json
 var {
+    extensionName,
+    extensionType,
     extensionsPath,
     extConfFile,
-    extConfFilepath,
     langs,
     motherLanguage
 } = require('../config.json');
+var extConfFilepath = `${extensionType}/${extensionName}`;
 const extensions = require(`${extensionsPath}/${extConfFilepath}/${extConfFile}`);
-const extPath = (extensions.hasOwnProperty('package') && extensions.package !== '') ? `${extensionsPath}/packages/${extensions.package}` : extensionsPath;
-console.log(extPath)
+const extPath = (extensions.hasOwnProperty('packages') && extensions.package !== '') ? `${extensionsPath}/packages/${extensions.packages}` : extensionsPath;
+
 motherLanguage =  (motherLanguage && motherLanguage) != '' ? motherLanguage : 'es-ES';
 const motherIso = motherLanguage.split('-')[0];
 const groupsExtensions = ['plugins', 'modules'];
-const ext = ['components', 'plugins', 'modules', 'package'];
+const ext = ['components', 'plugins', 'modules', 'packages'];
 
 if (!langs || langs.length === 0){
     langs = ['en-GB'];

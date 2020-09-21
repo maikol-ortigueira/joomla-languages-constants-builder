@@ -48,7 +48,7 @@ async function main() {
                 const text2 = await getText(selLangV, translated);
                 
                 // Push the language data
-                data.push({language: lang.language, text: translated, file: file});
+                data.push({language: lang.language, text: text2, file: file});
             });
         }
             

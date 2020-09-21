@@ -68,7 +68,7 @@ async function main() {
                 // Push the language data
                 data.push({
                     language: lang.language,
-                    text: translated,
+                    text: text2,
                     file: file
                 });
             });
