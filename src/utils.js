@@ -216,7 +216,7 @@ const asyncForEach = async (array, callback) => {
  */
 const getConstanteSufix = async () => {
     const constType = await trans("The constant's type", motherIso, 'en');
-    return await input.select(constType, ['Label', 'Description', 'Message', 'Placeholder', 'Other'])
+    return await input.select(constType, ['Label', 'Description', 'Message', 'Placeholder', 'Field_Label', 'Field_Description', 'Other'])
 }
 
 /**
@@ -236,14 +236,20 @@ const fixLanguageConstant = (text, extension, prefix, group, constantType=null) 
             case 'label':
                     constantType = 'lbl'
                 break;
-                case 'description':
-                    constantType = 'desc'
+            case 'description':
+                constantType = 'desc'
                 break;
-                case 'message':
-                    constantType = 'msg'
+            case 'message':
+                constantType = 'msg'
                 break;
-                case 'placeholder':
-                    constantType = 'hint'
+            case 'placeholder':
+                constantType = 'hint'
+                break;
+            case 'field_label':
+                constantType = 'field_lbl'
+                break;
+            case 'field_description':
+                constantType = 'field_desc'
                 break;
         
             default:
@@ -257,7 +263,7 @@ const fixLanguageConstant = (text, extension, prefix, group, constantType=null) 
     text = text.replace(regex, '_');
     if (prefix === 'plg'){
         text = `${prefix}_${group}_${extension}_${text}`;
-    } else if (prefix === 'pkg'){
+    } else if (prefix === 'pkg' || prefix === 'com'){
         text = `${prefix}_${extension}_${text}`;
     } else {
         text = `${prefix}_${extension}_${group}_${text}`;
