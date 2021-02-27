@@ -9,5 +9,5 @@
         "site": ["foo", "bar"],
         "admin": ["foo"]
     },
-    "package": "foo"
+    "packages": "foo"
 }

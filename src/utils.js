@@ -12,7 +12,8 @@ var {
     motherLanguage
 } = require('../config.json');
 var extConfFilepath = `${extensionType}/${extensionName}`;
-const extensions = require(`${extensionsPath}/${extConfFilepath}/${extConfFile}`);
+const extensions = require('../extensions-config.json');
+//const extensions = require(`${extensionsPath}/${extConfFilepath}/${extConfFile}`);
 const extPath = (extensions.hasOwnProperty('packages') && extensions.package !== '') ? `${extensionsPath}/packages/${extensions.packages}` : extensionsPath;
 
 motherLanguage =  (motherLanguage && motherLanguage) != '' ? motherLanguage : 'es-ES';
@@ -94,7 +95,7 @@ const getExtensionTypes = () => {
  */
 const getExtensionType = async () => {
     var extensionTypes = getExtensionTypes();
-    
+
     if (extensionTypes.length === 1) {
         var extensionType = extensionTypes[0];
     } else {
@@ -126,7 +127,7 @@ const getGroups = (extensionType) => {
  * Method to get all extension names of an extension
  * @param {string} extensionType The extension type
  * @param {string} group The group or client if modules or plugins
- * @returns {array} The extensions names 
+ * @returns {array} The extensions names
  */
 const getExtensions = (extensionType, group=null) => {
     if (group === null){
@@ -149,14 +150,14 @@ const getExtension = async (extensionType) => {
         case 'modules':
             var selGroup = await trans('Select a client', motherIso, 'en');
             break;
-    
+
         default:
             var selGroup = await trans('Select the plugin group', motherIso, 'en');
             break;
     }
     if (groupsExtensions.includes(extensionType)){
         const groups = getGroups(extensionType);
-    
+
         if (groups.length === 1) {
             group = groups[0];
         } else {
@@ -251,7 +252,7 @@ const fixLanguageConstant = (text, extension, prefix, group, constantType=null) 
             case 'field_description':
                 constantType = 'field_desc'
                 break;
-        
+
             default:
                     constantType = ''
                 break;
