@@ -11,14 +11,14 @@ const langs = targetLangs();
 // The user language
 const motherIso = motherLanguage.split('-')[0];
 // This filename
-const extType = 'package';
+const extType = 'packages';
 
 // The main function
 async function main() {
     // The translated input label strings
     const textToTranslate = await trans('The String Value', motherIso, 'en');
     const inputConst = await trans("The constant's value", motherIso, 'en');
-    
+
     // Get the extension name
     const ext = await getExtension(extType);
     // Get The String Value
@@ -26,11 +26,11 @@ async function main() {
 
     // Get the extension language path
     const langPath = `${extPath}/language`;
-    
+
     var data = [];
     // Push the mother languages data
     data.push({language: motherLanguage, text: text, file: `${langPath}/${motherLanguage}/${motherLanguage}.pkg_${ext['extension']}.sys.ini`});
-    
+
     // Start the translations
     const start = async () => {
         // Only if you need more than one language
@@ -40,18 +40,18 @@ async function main() {
                 const target = lang.target;
                 const isoLang = isoCountriesLanguages.getLanguage('en', target);
                 const selLangV = await trans(`${isoLang} version`, motherIso, 'en');
-                
+
                 // The extension language file
                 const file = `${langPath}/${lang.language}/${lang.language}.pkg_${ext['extension']}.sys.ini`;
                 // Translate the string
                 const translated = await trans(text, target);
                 const text2 = await getText(selLangV, translated);
-                
+
                 // Push the language data
                 data.push({language: lang.language, text: text2, file: file});
             });
         }
-            
+
         // Get the constant value from user
         const langString = await getText(inputConst).then(
             async langStr => {
